@@ -1,0 +1,9 @@
+[Testcase]
+testcase_path     = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase
+output_dir        = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase\\output
+output_icmp_dir   = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase\\output\\ICMP
+output_icmpv6_dir = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase\\output\\ICMPv6
+output_tcp_dir    = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase\\output\\TCP
+RaspberryPi_path  = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi
+
+[Analyze]

@@ -1,0 +1,86 @@
+[Control Panel]
+cle = D:\\CN5SW1\\Desktop\\final_cle_210720\\final_cle_210720
+AutoTest_Path = D:\\CN5SW1\\Desktop\\AutoTest Platform
+ip_list_file = D:\\CN5SW1\\Desktop\\AutoTest Platform\\ip_list.ini
+testcase_path = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase
+HOST_net0 = 192.168.50.109
+USER_net0 = pi
+PORT_net0 = 22
+PASSWORD_net0 = raspberry
+HOST_net1 = 192.168.50.36
+USER_net1 = pi
+PORT_net1 = 22
+PASSWORD_net1 = raspberry
+zip_dir_srcPath = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi
+zip_dir_dstname = D:\\CN5SW1\\Desktop\\RaspberryPi.zip
+unzip_dir_srcName = D:\\CN5SW1\\Desktop
+unzip_dir_dstPath = D:\\CN5SW1\\Desktop\\AutoTest Platform\\testcase
+main_client = /home/pi/Desktop/main.sh
+source_code_client=/home/pi/Desktop/RaspberryPi.zip
+main_local = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\main.sh
+source_code_local = D:\\CN5SW1\\Desktop\\RaspberryPi.zip
+result_client = /home/pi/Desktop/Result.zip
+result_local = D:\\CN5SW1\\Desktop\\Result
+analyze = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\control panel\\packet analyze.py
+
+[Client]
+main = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\main.sh
+packet_capture = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\packet_capture.sh
+packet_offset = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\packet_offset.sh
+packet_transfer = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\packet_transfer.sh
+set_netns_net0 = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\set_netns_net0.sh
+set_netns_net1 = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\set_netns_net1.sh
+test_program = icmpv6.sh
+test_program_path = D:\\CN5SW1\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\txt\\test_program.txt
+
+[Net Namespace Set 1]
+NS1_NAME = net0
+NS1_VID = 2
+NS1_BASE_IF = eth0
+NS1_IP4 = 192.168.2.20
+NS1_MASK4 = 24
+NS1_GW4 = 192.168.2.254
+NS1_IP6 = fd53:7cb8:383:2::10f
+NS1_MASK6 = 64
+NS1_GW6 = fd53:7cb8:383:2::fc10
+NS1_GW_MAC = 02:7D:FA:00:10:01
+
+
+
+[Net Namespace Set 2]
+NS2_NAME = net1
+NS2_VID = 5
+NS2_BASE_IF = eth0
+NS2_IP4 = 192.168.5.50
+NS2_MASK4 = 24
+NS2_GW4 = 192.168.5.254
+NS2_IP6 = fd53:7cb8:383:5::e
+NS2_MASK6 = 64
+NS2_GW6 = fd53:7cb8:383:5::fc10
+NS2_GW_MAC = 02:7D:FA:00:10:01
+
+
+
+[switch]
+HOST = 192.168.1.1
+USER = admin
+PASSWORD = 1234
+PORT = 23
+CP_normal = 0 
+CP_fixed = 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28
+CP_forbidden = 1,2,3,4
+PC1_vlan = 2
+PC1_normal = 0
+PC1_fixed = 1,2
+PC1_forbidden = 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28
+PC2_vlan = 5
+PC2_normal = 0
+PC2_fixed = 3,4
+PC2_forbidden = 1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28
+
+[AP]
+HOST = 192.168.50.1
+USER = admin
+PASSWORD = admin123
+PORT = 21
+

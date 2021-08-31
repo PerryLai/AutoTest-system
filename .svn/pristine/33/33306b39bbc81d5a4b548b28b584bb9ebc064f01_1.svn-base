@@ -1,0 +1,192 @@
+Auto Test Platform 基礎使用說明
+===
+一、 架構
+---
+
+
+二、 文件說明
+---
+### (一)  設定檔 
+測試前必須事先設好的資料。
+
+1. ip_list.ini  
+   每兩行為一組ip，並且由第一個ip負責發送封包 (放圖片)  
+   設定資訊包括: 
+   ```
+    1. 虛擬網路介面名稱 
+    2. VID 
+    3. 實際網路介面名稱 
+    4. IPv4 address 
+    5. IPv4遮罩 
+    6. IPv4 Gate Way 
+    7. IPv6 address 
+    8. IPv6遮罩 
+    9. IPv6 Gate Way 
+    10. IPv6 Gate Way MAC
+    ```
+2. config.ini  
+   放入所有檔案的路徑，包括本地路徑與傳送到客戶端的預設路徑。[ ] 為大分類標籤，底下為項目。  
+    1. [Control Panel]
+        ```
+        與control .py有關的檔案路徑與變數值皆存在這裡  
+        ```
+    2. [ Client ]
+        ```
+        要送到客戶端(即測試環境)的檔案路徑。  
+        注意在此存放的是本地路徑，因為會先經過壓縮，所以不需要添加客戶端路徑，除非有需要。  
+        ```
+    3. [ Net Namespace Set 1 ]
+        ```
+        與第一個VLAN環境設置有關的資訊。
+        ```
+    4. [ Net Namespace Set 2 ]
+        ```
+        與第二個VLAN環境設置有關的資訊。
+        ```
+    5. [Testcase and Analyzation Related Filepath]
+        ```
+        所有與封包送回後進行分析有關的程式或檔案的路徑都放在這裡
+        ```
+
+### (二) Control Panel 
+1. control .py
+
+   主要執行程式，負責設定fw、設定switch、設定 set_netns、初始化所有資料夾、更新所有相關文件的變數值、將要傳送到目標的檔案壓縮、傳送、等Client測試完畢後取回資料、最後呼叫分析程式，並繼續下一組ip的設定與傳送。
+
+2. sup .py
+
+   所有模組化的function都放在這裡，以下會一一介紹。
+
+   ```
+    zip_dir(srcPath,dstname)
+   ```
+
+   ```
+    unzip_dir(srcname,dstPath)
+   ```
+   
+   ```
+    config_file(_config_file_, offset1, offset2)
+   ```
+   
+   ```
+    config_file_all_contents(_config_file_, _title_)
+   ```
+   
+   ```
+    alter_ip_to_config(_config_file_, _alter_file_,i)
+   ```
+   
+   ```
+    alter_parameter_to_config(_config_file_,offset1,offset2,i)
+   ```
+   
+   ```
+    alter_config_to_set_netns_net0(_config_file_,_alter_file_)
+   ```
+   
+   ```
+    alter_config_to_set_netns_net1(_config_file_,_alter_file_)
+   ```
+   
+   ```
+    alter(_origin_file_, line, field, _config_file_, offset1, offset2)
+   ```
+   
+   ```
+    paramiko_net0(HOST,USER,PASSWORD,PORT,source_code_local,source_code_client)
+   ```
+   
+   ```
+    paramiko_net1(HOST,USER,PASSWORD,PORT,source_code_local,source_code_client)
+   ```
+   
+   ```
+    switch_set(HOST,USER,PASSWORD,PORT)
+   ```
+   
+   ```
+    ip_field(_ip_list_file_, count, field)
+   ```
+   
+   ```
+    movefile(srcfile,dstfile)
+   ```
+   
+   ```
+    field_define(Read_in_File, location, length, mode)
+   ```
+   
+   ```
+    ip_addr(ip)
+   ```
+   
+   ```
+    file_num(path)
+   ```
+   
+   ```
+    seq_num_pair(seq_file,pair_file)
+   ```
+   
+   ```
+    uniq(src_path,dst_path)
+   ```
+
+   ```
+    remove_old_file(file_path)
+   ```
+
+   ```
+    loss_ratio(seq_num_file, pair_file)
+   ```
+
+   ```
+    continuous_number(file_path)
+   ```
+
+3. packet_analyze .py  
+    將傳送回本地的封包進行分析並顯示測試結果。
+
+### (三) Client
+1. set_netns_net0.sh
+2. set_netns_net1.sh
+3. set_netns.sh
+4. main .sh
+5. packet_transfer.sh
+6. packet_capture.sh
+7. packet_offset.sh
+8. packet_transfer_programs   
+   (1) icmp .sh  
+   (2) tcp .sh
+9. txt  
+   (1) packet_type.txt  
+   (2) test_program.txt
+
+## 三、 運行環境
+***
+控制端 : windows    
+測試環境 : Raspberry Pi
+
+## 四、使用說明
+***
+
+## 五、軟體使用步驟
+***
+
+## 六、注意事項
+***
+### (一) 測試用的Pi必須事先安裝的軟體
+1. tshark  
+    ```
+    sudo apt install tshark
+    ```
+2. dos2unix  
+   ```
+   sudo apt install dos2unix
+   ```
+### (二) 測試前必須做的事情
+1.  客戶端必須先開啟ssh service  
+    ```
+    sudo service ssh restart
+    ```

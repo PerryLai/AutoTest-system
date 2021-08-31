@@ -1,0 +1,652 @@
+﻿{
+  "ViewModels": {
+    "Global": {
+      "TabGeneral": {
+        "SavedChip": "RTL9047AA",
+        "SavedIF": "I2C",
+        "ConfigOutputPath": ""
+      },
+
+      "GlobalMirror": {
+        "MirroredRxPorts": [ false, false, false, false, false, false, false ],
+        "MirroredTxPorts": [ false, false, false, false, false, false, false ],
+        "SelectedMirroringPort": 0,
+        "IsPortIsolation": false
+      },
+
+      "GlobalMisc": {
+        "IsLdoEnable": true,
+        "BinaryChipVer": true,
+        "SwitchMac": [ "00", "E0", "4C", "00", "00", "00" ],
+        "PhyId": "0",
+        "TestMode": "0"
+
+      },
+
+      "GlobalReg": {
+        "EntryRegList": [
+        ]
+      },
+
+      "GlobalOp": {
+        "SendRwakeTo": [ false, false, false, false, false ],
+        "SendSleepTo": [ false, false, false, false, false ],
+        "WupCap": [ true, true, true, true, true ],
+        "WurSleepCap": [ true, true, true, true, true ],
+        "AcceptSleepCap": [ false, false, false, false, false ],
+        "SleepReqFwCap": [ false, false, false, false, false ],
+        "LwakeToRwakeSending": [ true, true, true, true, true ],
+        "WholeChipSleepMask": [ true, true, true, true, true ],
+        "OpRwakeFwList": [
+          {
+            "RxPort": "P0",
+            "P0": false,
+            "P1": true,
+            "P2": true,
+            "P3": true,
+            "P4": true,
+            "P5": false,
+            "P6": false,
+            "P7": false,
+            "P9": false,
+            "P10": false
+          },
+          {
+            "RxPort": "P1",
+            "P0": true,
+            "P1": false,
+            "P2": true,
+            "P3": true,
+            "P4": true,
+            "P5": false,
+            "P6": false,
+            "P7": false,
+            "P9": false,
+            "P10": false
+          },
+          {
+            "RxPort": "P2",
+            "P0": true,
+            "P1": true,
+            "P2": false,
+            "P3": true,
+            "P4": true,
+            "P5": false,
+            "P6": false,
+            "P7": false,
+            "P9": false,
+            "P10": false
+          },
+          {
+            "RxPort": "P3",
+            "P0": true,
+            "P1": true,
+            "P2": true,
+            "P3": false,
+            "P4": true,
+            "P5": false,
+            "P6": false,
+            "P7": false,
+            "P9": false,
+            "P10": false
+          },
+          {
+            "RxPort": "P4",
+            "P0": true,
+            "P1": true,
+            "P2": true,
+            "P3": true,
+            "P4": false,
+            "P5": false,
+            "P6": false,
+            "P7": false,
+            "P9": false,
+            "P10": false
+          }
+        ]
+      },
+
+      "GlobalAcl": {
+        "SelectedTmpl0Fltr": [ "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET" ],
+        "SelectedTmpl1Fltr": [ "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET", "FILTER_FIELD_UNSET" ],
+        "DisplayedTmpl0Fltr": [ "--", "--", "--", "--", "--", "--", "--", "--", "--" ],
+        "DisplayedTmpl1Fltr": [ "--", "--", "--", "--", "--", "--", "--", "--", "--" ],
+        "InputTmpl0Field": [ "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000" ],
+        "InputTmpl1Field": [ "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000" ],
+        "InputTmpl0Mask": [ "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000" ],
+        "InputTmpl1Mask": [ "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000", "0000" ],
+        "SelectedTmpl0Pie": "PIE Entry",
+        "SelectedTmpl1Pie": "PIE Entry",
+        "Tmpl0Policer": false,
+        "Tmpl1Policer": false,
+        "IsTmpl0PolicerEnabled": false,
+        "IsTmpl1PolicerEnabled": false,
+        "DefaultAction": true,
+        "InputTmpl0AIF": "00000000",
+        "InputTmpl1AIF": "00000000",
+        "InputTmpl0PolicerVal": "0000",
+        "InputTmpl1PolicerVal": "0000",
+        "SelectedTmpl0Action": "TOOL_ACL_ACTION_NONE",
+        "SelectedTmpl1Action": "TOOL_ACL_ACTION_NONE",
+        "DisplayedTmpl0Action": "Action",
+        "DisplayedTmpl1Action": "Action",
+        "EntryAclList": []
+      },
+
+      "GlobalLut": {
+        "MulticastHash": true,
+        "EntryLutList": [
+        ]
+      },
+
+      "GlobalVlan": {
+        "EntryVlanList": [
+        ]
+      },
+
+      "GlobalPtp": {
+        "BasicJoinedPtpPorts": [ false, false, false, false, false, false, false ],
+        "BasicIsJoinedPtpPortsAll": false,
+        "BasicMasterPorts": [ false, false, false, false, false, false, false ],
+        "BasicIsMasterPortsAll": false,
+        "BasicTimeSync": false,
+        "BasicSlave": "P0",
+        "BasicPtpMode": "P2P TC",
+        "BasicAcCheckPorts": [ false, false, false, false, false, false, false ],
+        "BasicIsAcCheckPortsAll": false,
+        "BasicAcCheck": "Static",
+
+        "IntvlAnnounce": 2000,
+        "IntvlSync": 1000,
+        "IntvlPdelayRequest": 1000,
+        "IntvlDelayRequest": 1000,
+        "IsEnableToSend": false,
+
+        "TaiSelection": "Disable",
+        "TaiOutputPluse": 1,
+        "TaiOutputCtl": "Hardware",
+        "TaiInputClock": 125,
+
+        "DebugNeighborPdelayThreshold": "0x800",
+        //"DebugNpdtPort": "P0",
+        "DebugDeltaTimeForFirstSync": "0x000",
+        "DebugResidenceThreshold": "0x000",
+        "DebugKPKR1": "0x000",
+        "DebugKPKR0": "0x000",
+        "DebugNormalize": "0x000",
+
+        "WizJoinedPtpPorts": [ false, false, false, false, false, false, false ],
+        "WizIsJoinedPtpPortsAll": false,
+        "WizSwitchFwAllMsgFromGm": false,
+        "WizSwitchAsGm": false,
+        "WizHwModel": "RTL9047AA",
+        "WizDisplayedHwModel": "RTL9047AA",
+        "WizComboPortUse": "100BASE-T1",
+        "WizDisplayedComboPortUse": "100BASE-T1"
+      },
+
+      "GlobalQos": {
+        "PrioritySource": "QOS_DEFAULT_PRIORITY",
+        "SelectedPrioritySource": "Default",
+        "SelectedQueueRemappingPort": "0",
+        "PriDecQueueList": [
+          {
+            "Item": "Queue ID (Traffic Class)",
+            "Column0": 0,
+            "Column1": 0,
+            "Column2": 1,
+            "Column3": 1,
+            "Column4": 2,
+            "Column5": 2,
+            "Column6": 3,
+            "Column7": 3
+          }
+        ],
+        "PriDecInnerInnerList": [
+          {
+            "Item": "Internal Priority",
+            "Column0": 1,
+            "Column1": 0,
+            "Column2": 2,
+            "Column3": 3,
+            "Column4": 4,
+            "Column5": 5,
+            "Column6": 6,
+            "Column7": 7
+          }
+        ],
+        "PriDecOuterOuterList": [
+          {
+            "Item": "Internal Priority",
+            "Column0": 1,
+            "Column1": 0,
+            "Column2": 2,
+            "Column3": 3,
+            "Column4": 4,
+            "Column5": 5,
+            "Column6": 6,
+            "Column7": 7
+          }
+        ],
+        "PriDecDscpDscpList": [
+          {
+            "Item": "Internal Priority of DSCP 0-7",
+            "Column0": 0,
+            "Column1": 0,
+            "Column2": 0,
+            "Column3": 0,
+            "Column4": 0,
+            "Column5": 0,
+            "Column6": 0,
+            "Column7": 0
+          },
+          {
+            "Item": "Internal Priority of DSCP 8-15",
+            "Column0": 0,
+            "Column1": 0,
+            "Column2": 0,
+            "Column3": 0,
+            "Column4": 1,
+            "Column5": 1,
+            "Column6": 1,
+            "Column7": 1
+          },
+          {
+            "Item": "Internal Priority of DSCP 16-23",
+            "Column0": 1,
+            "Column1": 1,
+            "Column2": 2,
+            "Column3": 2,
+            "Column4": 2,
+            "Column5": 2,
+            "Column6": 2,
+            "Column7": 2
+          },
+          {
+            "Item": "Internal Priority of DSCP 24-31",
+            "Column0": 3,
+            "Column1": 3,
+            "Column2": 3,
+            "Column3": 3,
+            "Column4": 3,
+            "Column5": 3,
+            "Column6": 4,
+            "Column7": 4
+          },
+          {
+            "Item": "Internal Priority of DSCP 32-39",
+            "Column0": 4,
+            "Column1": 4,
+            "Column2": 4,
+            "Column3": 4,
+            "Column4": 5,
+            "Column5": 5,
+            "Column6": 5,
+            "Column7": 5
+          },
+          {
+            "Item": "Internal Priority of DSCP 40-47",
+            "Column0": 5,
+            "Column1": 5,
+            "Column2": 5,
+            "Column3": 5,
+            "Column4": 5,
+            "Column5": 5,
+            "Column6": 5,
+            "Column7": 5
+          },
+          {
+            "Item": "Internal Priority of DSCP 48-55",
+            "Column0": 6,
+            "Column1": 6,
+            "Column2": 6,
+            "Column3": 6,
+            "Column4": 6,
+            "Column5": 6,
+            "Column6": 6,
+            "Column7": 6
+          },
+          {
+            "Item": "Internal Priority of DSCP 56-63",
+            "Column0": 6,
+            "Column1": 6,
+            "Column2": 6,
+            "Column3": 6,
+            "Column4": 7,
+            "Column5": 7,
+            "Column6": 7,
+            "Column7": 7
+          }
+        ],
+        "PriRmkInnerList": [
+          {
+            "Item": "Egress Inner Tag Priority",
+            "Column0": 1,
+            "Column1": 0,
+            "Column2": 2,
+            "Column3": 3,
+            "Column4": 4,
+            "Column5": 5,
+            "Column6": 6,
+            "Column7": 7
+          }
+        ],
+        "PriRmkOuterList": [
+          {
+            "Item": "Egress Outer Tag Priority",
+            "Column0": 1,
+            "Column1": 0,
+            "Column2": 2,
+            "Column3": 3,
+            "Column4": 4,
+            "Column5": 5,
+            "Column6": 6,
+            "Column7": 7
+          }
+        ],
+        "PriRmkDscpList": [
+          {
+            "Item": "Egress DSCP Priority",
+            "Column0": 0,
+            "Column1": 8,
+            "Column2": 16,
+            "Column3": 24,
+            "Column4": 32,
+            "Column5": 40,
+            "Column6": 48,
+            "Column7": 56
+          }
+        ]
+      }
+    },
+
+    "Port": {
+      "0": {
+        "PortGeneral": {
+          "Role": true,
+          "PhyPower": true,
+          "IsWupEnabled": false
+        },
+
+        "PortVlan": {
+          "PortNum": 0,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      },
+
+      "1": {
+        "PortGeneral": {
+          "Role": true,
+          "PhyPower": true,
+          "IsWupEnabled": false
+        },
+
+        "PortVlan": {
+          "PortNum": 1,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      },
+
+      "2": {
+        "PortGeneral": {
+          "Role": true,
+          "PhyPower": true,
+          "IsWupEnabled": false
+        },
+
+        "PortVlan": {
+          "PortNum": 2,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      },
+
+      "3": {
+        "PortGeneral": {
+          "Role": true,
+          "PhyPower": true,
+          "IsWupEnabled": false
+        },
+
+        "PortVlan": {
+          "PortNum": 3,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      },
+
+      "4": {
+        "PortGeneral": {
+          "Role": true,
+          "SelectedC0PortIf": "100BASE - T1 PHY",
+          "PhyPower": true,
+          "IsWupEnabled": false,
+          "SelectedSgmiiComboPortCfg": "none",
+        },
+
+        "PortVlan": {
+          "PortNum": 4,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      },
+
+      "5": {
+        "PortGeneral": {
+          "SelectedE0PortIf": "FEPHY",
+          "SelectedLdoVoltage": "1.8v",
+          "SelectedRgmiiTxDelay": 1,
+          "SelectedRgmiiRxDelay": 0,
+          "IsWupEnabled": false,
+          "SelectedSgmiiExternalPortCfg": "none"
+        },
+
+        "PortVlan": {
+          "PortNum": 5,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      },
+
+      "6": {
+        "PortGeneral": {
+          "SelectedE1PortIf": "RGMII 1000Mbps / 3.3V",
+          "SelectedLdoVoltage": "1.8v",
+          "SelectedRgmiiTxDelay": 1,
+          "SelectedRgmiiRxDelay": 0,
+          "IsWupEnabled": false
+        },
+
+        "PortVlan": {
+          "PortNum": 6,
+          "InputVId": 1,
+          "InputPriority": 0,
+          "SelectedLearningBased": "Inner Tag",
+          "SelectedMode": "802.1Q-based",
+          "IngressFilter": true,
+          "EgressFilter": true,
+          "SelectedFrameType": "ACCEPT_FRAME_TYPE_ALL",
+          "DisplayedFrameType": "Untagged, priority-tagged and tagged"
+        },
+
+        "PortQos": {
+          "PriDecPriority": 2,
+          "PriRmkInnerTag": "Disabled",
+          "PriRmkOuterTag": "Disabled",
+          "PriRmkDscp": "Disabled",
+          "SelectedQueueSchedComb": "Strict Priority + WRR",
+          "DisplayedSchedItem0": "Strict Priority",
+          "DisplayedSchedItem1": "WRR",
+          "QueueSchedItem0": [ "SP_0", "SP_1", "SP_2", "SP_3", "SP_4", "SP_5", "SP_6", "SP_7" ],
+          "QueueSchedItem1": [ "WRR_0", "WRR_1", "WRR_2", "WRR_3", "WRR_4", "WRR_5", "WRR_6", "WRR_7" ],
+          "SelectedQueueSched": [ "Strict Priority", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR", "WRR" ],
+          "IsQueueWeightEnabled": [ false, true, true, true, true, true, true, true ],
+          "IsRateLimitingEnabled": [ true, true, true, true, true, true, true, true ],
+          "IsRateEnableOn": [ false, false, false, false, false, false, false, false ],
+          "IsCbsBwEnabled": [ false, false, false, false, false, false, false, false ],
+          "InputCbsBw": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+          "InputQueueWeight": [ 0, 2, 4, 8, 1, 2, 4, 8 ],
+          "InputRateLimiting": [ 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568, 1048568 ]
+        }
+      }
+    }
+  }
+}

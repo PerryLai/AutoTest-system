@@ -1,0 +1,159 @@
+### Routing Mode
+- Unicast
+  - Dynamic (Firewall OFF / without Static Host)
+    - 1 hop
+      - IPv4
+        - pass
+          - [ ] VID replace to outgoing interface VID
+          - [ ] SMAC replace to outgoing interface MAC
+          - [ ] DMAC replace to destination host MAC
+          - [ ] TTL decrease
+            - Send Pkt
+              - Ingress Port: 0
+              - VID: 2
+              - DMAC: 00:00:00:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: 192.168.5.50
+              - SIP: 192.168.2.10
+              - TTL: 255
+            - Expect Pkt
+              - Egress Port: 1
+              - VID: 5
+              - DMAC: Receiver's MAC
+              - SMAC: 00:00:00:00:00:02
+              - DIP: 192.168.5.50
+              - SIP: 192.168.2.10
+              - TTL: 254
+        - [ ] Non-configured DIP subnet block
+          - Send Pkt
+              - Ingress Port: 0
+              - VID: 2
+              - DMAC: 00:00:00:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: 192.168.5.50
+              - SIP: 192.168.2.10
+              - TTL: 255
+            - Expect Pkt
+              - Egress Port: N/A
+      - IPv6
+        - pass
+          - [ ] VID replace to outgoing interface VID
+          - [ ] SMAC replace to outgoing interface MAC
+          - [ ] DMAC replace to destination host MAC
+          - [ ] Next hop decrease
+            - Send Pkt
+              - Ingress Port: 0
+              - VID: 2
+              - DMAC: 00:00:00:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: FD53:7CB8:383:5::e
+              - SIP: FD53:7CB8:383:2::10F
+              - Next hop: 65
+            - Expect Pkt
+              - Egress Port: 1
+              - VID: 5
+              - DMAC: Receiver's MAC
+              - SMAC: 00:00:00:00:00:02
+              - DIP: FD53:7CB8:383:5::e
+              - SIP: FD53:7CB8:383:2::10F
+              - Next hop: 64
+        - [ ] Non-configured DIP subnet block
+          - Send Pkt
+              - Ingress Port: 0
+              - VID: 2
+              - DMAC: 00:00:00:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: FD53:7CB8:383:5::e
+              - SIP: FD53:7CB8:383:2::10F
+              - Next hop: 65
+            - Expect Pkt
+              - Egress Port: N/A
+    - 2 hops
+      - IPv4
+        - pass
+          - [ ] VID replace to outgoing interface VID
+          - [ ] SMAC replace to outgoing interface MAC
+          - [ ] DMAC replace to destination host MAC
+          - [ ] TTL decrease
+            - Send Pkt
+              - Ingress Port: 0
+              - VID: 10
+              - DMAC: 00:E0:4C:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: 192.168.2.2
+              - SIP: 192.168.1.1
+              - TTL: 255
+            - Expect Pkt
+              - Egress Port: 1
+              - VID: 20
+              - DMAC: Receiver's MAC
+              - SMAC: 00:E0:4C:00:00:02
+              - DIP: 192.168.1.1
+              - SIP: 192.168.2.2
+              - TTL: 254
+        - [ ] Non-configured DIP subnet block
+          - Send Pkt
+              - Ingress Port: 0
+              - VID: 10
+              - DMAC: 00:E0:4C:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: 192.168.5.2
+              - SIP: 192.168.1.1
+              - TTL: 255
+            - Expect Pkt
+              - Egress Port: N/A
+        - [ ] Non-configured SIP subnet block
+          - Send Pkt
+              - Ingress Port: 0
+              - VID: 10
+              - DMAC: 00:E0:4C:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: 192.168.2.2
+              - SIP: 192.168.4.1
+              - TTL: 255
+            - Expect Pkt
+              - Egress Port: N/A
+      - IPv6
+        - pass
+          - [ ] VID replace to outgoing interface VID
+          - [ ] SMAC replace to outgoing interface MAC
+          - [ ] DMAC replace to destination host MAC
+          - [ ] Next hop decrease
+            - Send Pkt
+              - Ingress Port: 0
+              - VID: 10
+              - DMAC: 00:E0:4C:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: FD53:7CB8:383:20::e
+              - SIP: FD53:7CB8:383:10::1
+              - Next hop: 65
+            - Expect Pkt
+              - Egress Port: 1
+              - VID: 20
+              - DMAC: Receiver's MAC
+              - SMAC: 00:E0:4C:00:00:02
+              - DIP: FD53:7CB8:383:20::e
+              - SIP: FD53:7CB8:383:10::1
+              - Next hop: 64
+        - [ ] Non-configured DIP subnet block
+          - Send Pkt
+              - Ingress Port: 0
+              - VID: 10
+              - DMAC: 00:E0:4C:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: FD53:7CB8:383:50::e
+              - SIP: FD53:7CB8:383:10::1
+              - Next hop: 65
+            - Expect Pkt
+              - Egress Port: N/A
+        - [ ] Non-configured SIP subnet block
+          - Send Pkt
+              - Ingress Port: 0
+              - VID: 10
+              - DMAC: 00:E0:4C:00:00:01
+              - SMAC: Sender's MAC
+              - DIP: FD53:7CB8:383:20::e
+              - SIP: FD53:7CB8:383:40::1
+              - Next hop: 65
+            - Expect Pkt
+              - Egress Port: N/A

@@ -1,0 +1,41 @@
+import sup
+import telnetlib
+
+sup.switch_set('192.168.1.1','admin','1234','23')
+'''
+HOST='192.168.1.1'
+USER='admin'
+PASSWORD='1234'
+PORT='23'
+
+tn = telnetlib.Telnet()
+tn.open(HOST,PORT)
+
+# 要符合Cisco設備所出現的提示字元, 故改為Username: 
+tn.read_until(b"User name:")
+# user會代入剛才手動輸入的帳戶名
+tn.write(USER.encode('ascii') + b"\n")
+if PASSWORD:
+# 要符合設備所出現的提示字元, Cisco設備會出現Password:
+    tn.read_until(b"Password: ")
+# 把剛才手動輸入的密碼帶入
+    tn.write(PASSWORD.encode('ascii') + b"\n")
+
+# 這邊可以寫上我將要在登入設備後去執行的指令
+tn.write(b"configure\n")
+
+tn.write(b"vlan 1\n")
+tn.write(b"fixed 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28\n")
+tn.write(b"forbidden 1,2,3,4\n")
+tn.write(b"exit\n")
+
+tn.write(b"vlan 2\n")
+tn.write(b"forbidden 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28\n")
+tn.write(b"fixed 1,2\n")
+tn.write(b"exit\n")
+
+tn.write(b"vlan 5\n")
+tn.write(b"forbidden 1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28\n")
+tn.write(b"fixed 3,4\n")
+tn.write(b"exit\n")
+'''

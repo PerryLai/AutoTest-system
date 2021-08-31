@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import os
+FDTDProgramPath = 'D:\perry_lai\Desktop\AutoTest Platform\Source Code\control panel\packet analyze.py'
+commandText = "python3 "+'"' + FDTDProgramPath + '"'
+print("%s"%commandText)
+os.system(commandText )

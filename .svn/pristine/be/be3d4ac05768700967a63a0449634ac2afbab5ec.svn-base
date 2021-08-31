@@ -1,0 +1,416 @@
+﻿RTKAutoSwitchTool VA 2.1.6.20.0 release note
+-------------------------------------
+New Feature
+*[Port Interface]When either port in P5/P8/11 is configured to RGMII/RMII/MII, the other two ports can't be configured to the interfaces metioned previously. Add detection for all current interface when runtime setting.
+*[Mirror] For customer want to use egress mirror for specific ports & MACs, add L2/L3 Unicast egress mirror and Flash L2 ACL load/save mechanism. 
+Firmware updates:
+  * RTL906X-7XA_Patch-Firmware-Image_v4.9.5.090821.bin
+Bug Fix
+*[Firmware][SPI]Improve SPI calibration algorithm. Previously when the DVDD09 is unstable, the SPI master can't sample the data correctly. Now we adjust sample mechanism to improve the tolerance of voltage change, But we  still can't guarantee that sample data is correct under unstable power situation.
+*[Firmware][PTP]According the discussion with our testing partner (TC11 group),  one-step testing requires the bridge as 1588 TC. One-Step TC forwards sync after it received sync from its slave port, otherwise it does not send any sync frame.
+*[Firmware][PTP]Change RTL906x_7x processes one-step sync mechanism. 802.1AS-2011 does not use onestep sync, and IEEE 1588v2 TC did not sync its time after receiving.
+*[Firmware][SecureBoot]when boot with secure boot ASE + RSA mode, the HW cyper engine is timeout (about 400ms) when we use CAR key to decrypt configuration. This timeout 400ms is longer than expect. To fix this issue, the OTP 0xDA[2] must be cleared.
+*[Firmware][Dot1x]for protocol 802.1x, fix the secret key to correspond to each port. The previous approach (before firmware 4.9.4)  is to assign secret keys according to the client authentication order, which will cause the keys to be messed up.
+*[Json]all versions before v2.1.6.20.0, there is an issue that the tool imports old json, and setting new features, then export a new json, which the new json will have no new feature configurations at all.
+*[Calibration] Calibration pattern doesn't be inserted in binfile when generating Image Binfile directly without conducting calibration procedure but browsing previous generated Calibration Pattern, starting from tool v2.1.6.16.0-2.1.6.19.1 
+*[ACL]Correct served ACL index hiden rule.
+*[Binfile]To increase configuration size in binfile and avoid misunderstanding, set config length type as 4bytes instead of optional 2/4bytes.
+*[Stacking]in stacking boot mode, mac address is determined by Strapping pin P9_TXD[2:1]. to avoid misunderstanding, add P9_TXD[2:1] to force binding MAC address in Manual gen.
+*[Stacking]stacking timeout parameter update, before this tool (2.1.6.20.0), stacking boot up time too long when update USXGMII parameter on slave port that will cause very short USXGMII down link.
+*[Routing]Fix the maximum number of routes support is 1300. 
+*[Port Interface]Fix the auto-negotiation mode of HISGMII issue.
+*[Register]The register types which are named as "25uA", "OPFSM", "FE" and "FWCFG" in Register page are reserved for use in testing and have no functionality. 
+Known Issue
+ *[Mirror]Egress Mirror may cause temporary packets loss during flash write back.  Doesn’t support mirroring PTP traffic sent from RTL9075A. 
+
+RTKAutoSwitchTool VA 2.1.6.19.1 release note
+-------------------------------------
+New Feature
+ * [Firmware] from 2.1.6.19.1, it will support PTP and routing under stacking boot mode, which is a new function.
+ * [Firmware] Before FW 4.9.3, the system will do dual image even the image is verified fail. There is a risk, when system is unstable (0.9v) situation, sometimes it will read wrong data from flash risk. Then there is an enhancement action will be adopted, from FW 4.9.3, we will Support image authentication checking before trigger dual image when secure boot is enabled. This enhancement must be enabled by setting OTP address 0xC5 bit[2]=0. Please check this bit before use the Dual image function.
+Firmware updates:
+  * RTL906X-7XA_Patch-Firmware-Image_v4.9.3.070721.bin
+Bug Fix
+ * [Port Interface] The tool between v2.1.6.18.0 to v2.1.6.19.0 has a limitation, that these tools will configure FE PHY interface or load old version JSON file with FE PHY interface configured, then the Link capability and auto-negotiation should be configured manually.
+ * [Stacking] Forcing the first entry in Stacking List as Master Switch, this is the GUI behaviors.
+ * [Routing] There is an issue that tool import an exit JSON file to configure Static Host & Multicast routing feature image, then the filed configInfo will be wrong value. This issue happened between Tool v2.1.6.14.0 to v2.1.6.19.0.
+ * [PHY Reset] Before v2.1.6.19.1, 100BASE-T1 ports (P0~P5, P9~P10, P12~P13) would do reset one time during switch boot up. This re-link behavior lead customer detect port link down and send out the alarm. From v2.1.6.19.1, we modified this behavior on 100BASE-T1 ports and link will be ready after configuration done. The side effect of this modification is that 100BASE-T1 link-up time will increase around 20~30ms.
+Known Issue
+ * When using stacking boot, user shall not set MAC address through register 0x4A610068, 0x4A61006C.
+
+RTKAutoSwitchTool VA 2.1.6.19.0 release note
+-------------------------------------
+New Feature
+ * [Tool][Interface] Support P9 MII half duplex.
+ * [Tool] When image update is failed, tool will show a popup message box to indicate the following error message: 1. IC version of image and SDK are not matched ; 2. Part number of image and IC are not matched 
+ * [Tool][Stacking] Support Stacking
+ * [Tool] Expand another two configuration size, which are 256 and 512KB. Because the maximum size of table is possible to more than 128KB. Note: ACL/VLAN/L2/Routing maximum entry are not verified completely in 2.1.6.19.0
+Firmware updates:
+  * RTL906X-7XA_Patch-Firmware-Image_v4.9.2.280621.bin
+Bug Fix
+ * [Firmware][Stacking] When routing enable in stacking mode, the stacking packet will be flooding. This issue is caused by an incorrect ACL register value which is modified during the routing initialization. 
+ * [Tool] If P6 or P7 (RTL9075) select N/A, and connect to 100base/1000baseT1 link partner, the packet also can transmit properly. This bug occurs in (version > 2.1.6.12 && version < 2.1.6.18). 
+ * [Tool] The RTL9072-VA has SGMII link-up failed issue when P10 configure to SGMII and the link partner is RTL9010-VA (SGMII mode).
+
+Known Issue
+ * [Tool] if tool version greater than 2.1.6.18.0 (include 2.1.6.18.0)] If user apply otpv2/v3, and configure P10 as 100baseT1 during boot-up. The P10 LED will bright even if P10 does not link to link-partner. But if trigger link change event, this scenario will disappear
+ * [Tool] Under Stacking mode, PTP and routing under stacking does not support in this version. Flow control shall not apply on the stacking port. TC-10 Sleep/Wake-up is independent in different switches 
+ * [Tool] [Known Issue] Issue occur flow:  User click “Make Image File” directly and then click “Export Settings”, or just export JSON directly. Under this circumstances, “Slot” column of parameter “ConfigInfo” may have the wrong value when make image. 
+                        The right approach: User click “Clean Table” in Routing Page first and then click “Select” in Routing Windows. After doing this, click “Make Image File” or “Export Settings” can get correct result. 
+
+RTKAutoSwitchTool VA 2.1.6.18.1 release note
+-------------------------------------
+New Feature
+ * [Firmware][PTP] Add support for PTP one step synchronize mechanism, which is TC11 PTP requirements.
+ * [Firmware][PTP] The preciseOriginTimestamp keeps zero if never attached GM and entry sync lost recovery. In automotive AS, without sync within a specified timer at slave port, then master ports should send sync message with a constant original timestamp and advancing correction filed. However, we set zero in the perciseOriginTimestamp and add elapsed time into CorrectionField. 
+Firmware updates:
+  * RTL906X-7XA_Patch-Firmware-Image_v4.9.1.150621.bin
+Bug Fix
+ * [Firmware][Routing] Fix issue for unicast dynamic routing in FW v4.9.0, which dynamic route doesn't work due to static multicast exist. 
+ * [Firmware][PTP] PTP didn’t drop messages if vlan configuration is conflicted. Before this release, RTL906x_7x processed untag PTP even it was configured VLAN enabled, now it will drop untag ptp message if the PTP VLAN is enabled. This is only supported by SDK 4.9.0 and after. 
+ * [Firmware][Dot1x] Fix the problem that the arp packet with source ip address equal to radius server cannot be forwarded after dot1x is enabled.
+ * [Tool][VLAN1] VLAN1 can be directly modified by image(.bin) file, no need to pre-configure 0x1b0008 as 0xC00. 
+ * [Tool][Routing] Correct IP version, firewall mode, egress interface index, ttl mode, slot of static host. Correct firewall mode, ttl mode, slot of multicast. 
+Known Issue
+ * [Tool][Ethernet Calibration] Flash calibration by indirect Ethernet access has possibility failed.
+-------------------------------------
+
+RTKAutoSwitchTool VA 2.1.6.18.0 release note
+-------------------------------------
+New Feature
+  * [Firmware] [PTP] Support transmit customize EtherType and DA, this requirement comes from TC11.
+  * Add FE speed/duplex/auto-negotiation function in Port Properties because of customer requirement. 
+  * Add reg field write domain to fix SMI register would be overlay by unexpected interface configuration. 
+  * AutoSwitchTOOL OTP disable Dual Image: Add disable dual image by OTP configuration with register interface; Add disable dual image by OTP configuration in OTP programming image 
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.9.0_190521.bin
+Modify
+  * [Firmware] [PTP] Not necessary to use GUI setting to enable PTP in the early step, allow the use of SDK-style configures PTP after boot up (before receiving/transmitting any PTP message). 
+  * Remove P0~P3 phy reset during boot-up to accelerate 100 base-T1 phy link up time because of customer requirement.
+Bug Fix
+  * [Firmware] [System] Fix SMI register would be overlay by unexpected interface configuration. This issue lead switch P7 can't link up properly after booting up.
+  * [Firmware] [PTP] The first init value of pdelay rate ratio is not correct, may cause next hop takes more rounds to sync to master 
+  * Phy test mode P12/P13 not work in all the mode. Modify phy test mode function to solve this issue. 
+  * RTL9068 VLAN Table Entry Member/Untagged Ports GUI Display Modification, which will show the enabled ports based on types of chips.
+  * The port QoS rate setting cannot be configured with JSON. Port QoS JSON objects are modified and checked.
+Note
+  * Flashless mode is not available in current switch tool version.
+  * If disable dual image, there is no dual image process when switch boot up after upgrade image.
+
+RTKAutoSwitchTool VA 2.1.6.17.1 release note
+-------------------------------------
+New Feature
+  * [Firmware] [PTP] Support configure length 4 bytes. The loading PTP configurations does not according to GUI's settings. It causes PTP does not work when generate image using 4 byte configure length without this fix. Hence, don't switch configure length to 4 bytes without this fix.
+* [Firmware] [System] add default patch point 0x12 & 0x35, for fix abormal phy sleep function.
+* [Firmware] [Flash] Support runtime calibration to improve runtime flash calibration accuracy. This function will re-calibrate and update related flash parameter when called.
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.8.0_290421.bin
+Bug Fix
+  * [Firmware] [PTP] The default latency is 100BASE-T1 not FE when port 14 is enabled and selected as FE. Without this fix, and system uses the port 14 as master port or slave port, it causes time sync incorrect.
+* [Firmware] [PTP] PTP update pdelay result, rate ratio in run-time. And it uses internal SRAM as buffer. This buffer address is overlap for store temp rate ratio. Hence, it may cause incorrect rate ratio after ptp update flash
+* [Firmware] [System] Confirm pcie init done before 0xBF status for make sure all the packet can transmit after 0xBF status
+* [Firmware] [Routing] Focus on run time configure routing bug, mainly to don't flush OIL table during initialization. Flush OIL table by HW may cause routing write data during table flushing, because we already indicate available OIL in config, it's no need to flush OIL table.
+* [Firmware] [Routing] Focus on run time configure routing bug, mainly to flush host table & multicast collision table by software. Host table & multicast collision table can't be flushed by hardware, thus these table should be flushed by software. This will increase bootup time about 5.8ms
+* [Firmware] [PTP] Filter peer delay (pdelay) rate ratio. The pdelay rate ratio of slave port effects cumulativeScaledRateOffset. RTL906x_7x added a filter in order to avoid burst rate ratio. The pdelay rate ratio for generate cumulativeScaledRateOffset = last one + 0.25*current.
+  * [Firmware] [PTP] PTP does not send pdelay_req from slave port and no sync/follow-up to from master port. The PTP protocol does not send any packets to no linked port and update linked status while link change. In some configurations, PTP protocol did not detect link changed event, hence it did not send any PTP related packets such as sync/follow-up, pdelay_req. Without this fix, you need to relink port to make link change. Then the protocol back to normal.
+* [Firmware] [Phy] Fix phy sleep function, for phy sleep function abnormal.
+* [Firmware] [Routing] Fix multicast 4 key only won't work on routing mode issue. In previous version, ingress interface won't be set correctly when has multicast config only.
+
+RTKAutoSwitchTool VA 2.1.6.17.0 release note
+-------------------------------------
+New Feature
+  * All Routing tables on GUI page are going to support multi-selected function in GUI
+  * Adjust the parameter of the PHY to increase IOP margin in C&S
+  * Adjust the parameter of the PHY to increase IOL margin in UNH and EMC margin in FTZ
+  * Adjust the parameter of the PHY to increase IOL margin in UNH 
+  * [Firmware] manually trigger the dual image function. Add a new command for customer who want to trigger dual image operation manually without executing dual image operation automatically by firmware flow after system reboot, but the user has to disable the dual image function by OTP in advance.
+  * Add a new command for customer who want to trigger dual image operation manually without executing dual image operation automatically by firmware flow after system reboot, but the user has to disable the dual image function by OTP in advance
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.7.3_150421.bin
+Bug Fix
+  * Resolve the DISB pin low access issue, before 2.1.6.17.0, there is an issue to access VLAN/L2 table when DISB pin is low (e.g. If you write VLAN/L2 table when the DISB is low, then it will disappear when you pull the DISB pin high)
+Note
+  * There has a constraint that can only configure up to 64 VLAN table entries 
+
+RTKAutoSwitchTool VA 2.1.6.16.0 release note
+-------------------------------------
+New Feature
+  * Support Qci (FRER and PSFP page) in runtime mode and make image mode.
+  * Dumping ACL Partial Entry partially, ACL Aggregated Index Information, PIE Entry Template Key "Customized" can be defined by user.
+  * Automatic OTP programing solution: add flash erase function in program page.
+  * Support IGMP function enable/disable, aging time adjusting, and l2 default drop enable/disable.
+  * Adding Calibration Folder for user to store calibration flash pattern(32 bytes) in Update Image page. Users can also define calibration file name and decide if include certain file as flash pattern in fw_config.bin in Make Image File page.
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.7.2_250321.bin
+Bug Fix
+  * Long boot time for PCI-E OTPv4 (Incorrect initialization due to compatibility issues).
+Note
+  * In make image mode, add warning message when configuration on tool exceeds the image file size.
+  * Interface Tests pass partially for RTL9054 .
+  * Flow Control in development, please keep the default settings.
+
+RTKAutoSwitchTool VA 2.1.6.15.0 release note
+-------------------------------------
+New Feature
+  * N/A
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.7.1_180321.bin
+Bug Fix
+  * Modify the parameters of RTL9068ABD-VA P1 pure 100BASE-T1 PSD.
+  * Fix RGMII RX delay mode settings failed for 10M/100Mbps on all RGMII interfaces.
+  * Resolve the register access failed with Ethernet from v2.1.6.14.0. Before v2.1.6.14.0, the behavior is all right.
+  * Fix PTP Misc Issues.
+  * Send Pdelay_req from Master port
+  * Assign ISS priority for packets in switch fabric
+  * asCapable mask default
+  * Port Number remapping
+  * No Sync recovery if no Sync/follow-up received from slave port
+  * Overwrite my ClockID into sync/follow-up
+  * Change targetPortIdentity.clock to 0xFFFFFFFFFFFFFFFF (Firmware v4.7.1)
+  * Change targetPortIdentity.portNumber to 0xFFFF (Firmware v4.7.1)
+  * The logInterval of follow-up is always zero. (Firmware v4.7.1)
+  * If two master ports has different interval, the smaller one will not get sync/followup. (Firmware v4.7.1)
+  * [Routing] Prevent HW hash index never found because ALE and CPU query it at the same time. (Firmware v4.7.1)
+  * [Single Loop] Fix the control port of single loop restarts to communicate delay 6 minutes when resuming the topology. (Firmware v4.7.1)
+Note
+  * Please don't change the following settings:
+  * Delay threshold unit
+  * One-Step TX
+  * PTP packet formatted: Customize Destination Address
+  * PTP packet formatted: MACADDRESS
+  * PTP packet formatted: Customize EtherType, VLAN support
+
+RTKAutoSwitchTool VA 2.1.6.14.1 release note
+-------------------------------------
+New Feature
+  * N/A
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.7.0_050321.bin
+Bug Fix
+  * [PTP] Sync and Pdelay_req interval less than 1/16 second (125ms), there is one long interval after saving PTP related information into flash. (Firmware v4.7.0)
+  * [PTP]PTP messages with other traffic load, RTL906x_7x get incorrect egress time. (Firmware v4.7.0)
+  * [PTP]The cumulativeScaledRateOffset is zero sometimes even bridge and gm are the same frequency drift. (Firmware v4.7.0)
+  * [PTP]Does not trigger event error log after received incorrect pdelay_resp. (Firmware v4.7.0)
+  * [PTP]Sync frame does not padding zero content. (Firmware v4.7.0)
+  * [Routing] Prevent non-NDP Layer4 header with 0x87, 0x88 at first byte to hit the ACL rules. (Firmware v4.7.0)
+  * Port 8 cannot get internet access through Ethernet of RTL9068 with OTPv3 configurations. (DLL) 
+
+RTKAutoSwitchTool VA 2.1.6.14.0 release note
+-------------------------------------
+New Feature
+  * Support RTL9054AN
+  * Support Flow Control
+  * [Routing] Support Dynamic configuration (Firmware v4.6.1)
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.6.1_250221.bin
+Bug Fix
+  * Modify parameters of pure 100 PHY
+  * Add mac force link down when the correspond port is selected N/A
+  * Change the page in Ethernet access mode
+  * [Routing] Correct OIL interface index info (Firmware v4.6.1)
+  * [Interface] Fix PCIE port 11 link issue (Firmware v4.6.1)
+  * [Routing] TCP Routing Break when use specific SPORT (Firmware v4.6.1)
+
+RTKAutoSwitchTool VA 2.1.6.13.0 release note
+-------------------------------------
+New Feature
+  * Compatible between different OTP versions
+Firmware updates:
+  * RTL907X_6XA-V4-OTP-Programmer_V.4.1.1_040221.bin
+Bug Fix
+  * OTP programming using flashing in some limit states. (OTP Programmer V 4.1.1)
+
+RTKAutoSwitchTool VA 2.1.6.12.0 release note
+-------------------------------------
+New Feature
+  * Generating Secure Image Binary File with Stacking Configure Setting
+  * FEPHY Analog Parameter Default Value Modification
+  * Disable PCIe quick boot in Image Configuration
+  * Setup time in not PTP way
+  * Support routing configuration in flashless mode
+Firmware updates:
+  * RTL906X_7XA_Patch-Firmware-Image_v4.6.0_280121.bin
+Improvement (Firmware v4.6.0)
+  * [System] Support routing config for Ethernet flashless
+  * [OTP] Remove OTP deep sleep mode
+  * [PTP] Check resident time is over correction Field valid bits incorrect
+  * [RSTP] Enhance Single Loop mechanism
+  * [PTP] change PPS delay from 72ns~78ns to 52ns~64ns
+Bug Fix
+  * OTP Parallel Programming via Ethernet Mode
+  * Mirroring & RSPAN Configuration Setting
+  * Connection Failed while set Register 0xFFFF01 as value 0x0
+
+RTKAutoSwitchTool VA 2.1.6.11.0 release note
+-------------------------------------
+New Feature
+    * Reduce routing boot time and routing improvement
+    * OTP programming using flashing (OTP-Programmer v4.1.0)
+    * Support RA & Unsolicited RA on RTL906X/7X (Firmware v4.5.0)
+Firmware updates:
+    * RTL906X-7XA_Patch-Firmware-Image_v4.5.0_150121.bin
+    * RTL906X-7XA_OTP-Programmer-Image_v4.1.0.150121.bin
+Improvement (Firmware v4.5.0)
+    * [routing] Imporve Routing Configuration Performance to Reduce bootup time
+    * [otp] Change to deep sleep mode when OTP is idle
+    * [system] Remove ACL table related patch code
+    * [other] Fix Coverity/MISRA-C warning
+Bug Fix
+    * Choose the speed of XMII
+    * Port isolation settings
+    * Use Mirror and RSPAN separately
+    * Multi-device OTP programming
+    * Image generation when verison changing
+    * P6/P7 link failed in flashless mode on RTL9068
+    * Routing flow in flashless mode
+    * Routing functions failed with JSON files import/export (Switch Tool VA 2.1.6.11.1)
+
+RTKAutoSwitchTool VA 2.1.6.10.0 release note
+-------------------------------------
+New Feature
+    * Correct flags of NA (F/W)
+    * Choose the speed of XMII
+Firmware updates:
+    * RTL907X_6XA-V4-Patch-Firmware_V4.4.9_301220.bin
+Bug Fix
+    * Ethernet access issue after Ethernet erasing
+    * Sleep/Wakeup import/export JSON files failed
+    * Port isolation settings
+    * Link failed on SGMII with RTL9075 and RTL9010
+
+
+RTKAutoSwitchTool VA 2.1.6.9.0 release note
+-------------------------------------
+New Feature
+    * Image fool-proofing design
+    * RGMII delay mapping help table
+Firmware updates:
+    * N/A
+Bug Fix
+    * Routing
+
+RTKAutoSwitchTool VA 2.1.6.8.0 release note
+-------------------------------------
+New Feature
+    * Image integrity-checking (Automatic flash Hash calculate)
+    * ACL configuration in image mode
+    * Storm control
+    * Image fool-proofing design in Switch Tool
+    * Add types in image Register Page
+Firmware updates:
+    * RTL907X_6XA-V4-Patch-Firmware_V4.4.7_141220.bin
+Bug Fix
+    * Ethernet Flashing
+    * RTL9068 PCIe parameter settings
+
+RTKAutoSwitchTool VA 2.1.6.7.0 release note
+-------------------------------------
+New Feature
+    * Make Image Register Page add PHY Type
+    * ACL combination
+Firmware updates:
+    * RTL907X_6XA-V4-Patch-Firmware_V4.4.5_251120.bin
+Bug Fix
+    * Unicast Host Routing Not Working (Patch Firmware V4.4.5)
+    * Qbv image mode
+    * P8 SGMII force mode
+    * I2C/SPI/MDIO Connection Check
+    * I2C ID/MDX ID
+    * Sleep/WakeUp
+    * RTL9068 freezes when booting
+
+RTKAutoSwitchTool VA 2.1.6.6.0 release note
+-------------------------------------
+New Feature
+    * Sleep/Wakeup (Modified)
+    * Storm Control
+    * Routing config 4 byte
+    * VLAN (Ethernet Mode)
+    * Ethernet Flashing/Calibration/Erase Block
+Firmware updates:
+    * RTL907X_6XA-V4-Patch-Firmware_V4.4.1_171120.bin
+Bug Fix
+    * Remove 1000M test mode 7
+    * P10/P11 SGMII force mode
+    * PTP
+
+RTKAutoSwitchTool VA 2.1.6.5.1 release note
+-------------------------------------
+New Feature
+    * Avnu gPTP
+Firmware updates:
+    * N/A
+Bug Fix
+    * N/A
+
+RTKAutoSwitchTool VA 2.1.6.5.0 release note
+-------------------------------------
+New Feature
+    * N/A
+Firmware updates:
+    * N/A
+Bug Fix
+    * Settings of RTL9068/9072 Port interface configurations
+
+RTKAutoSwitchTool VA 2.1.6.4.0 release note
+-------------------------------------
+New Feature
+    * Basic OTP
+    * Port Enable/Disable
+    * MIB
+    * Routing (Modified)
+    * Mirror (Modified)
+    * ACL Reserve Entry
+Firmware updates:
+    * N/A
+Bug Fix
+    * N/A
+
+RTKAutoSwitchTool VA 2.1.6.3.0 release note
+-------------------------------------
+New Feature
+    * N/A
+Firmware updates:
+    * N/A
+Bug Fix
+    * SPI R/W failed
+
+RTKAutoSwitchTool VA 2.1.6.2.0 release note
+-------------------------------------
+New Feature
+    * Ethernet Disable
+    * OTP Stacking and PCIE
+Firmware updates:
+    * N/A
+Bug Fix
+    * Wrong default value of the SPID and TPID
+
+RTKAutoSwitchTool VA 2.1.6.1.0 release note
+-------------------------------------
+New Feature
+    * Qav/Qbv
+    * Secure Boot
+Firmware updates:
+    * RTL907X_6XA-V4-Patch-Firmware_V4.2.1_081020.bin
+Bug Fix
+    * N/A
+
+RTKAutoSwitchTool VA 2.1.6.0.0 release note
+-------------------------------------
+New Feature
+    * Import/Export JSON configuration file
+    * Generate/Flashing binary file
+    * OTP (Not supported Ethernet mode)
+    * Port configuration
+    * Sleep and wakeup: Partially supported
+    * VLAN
+    * ACL
+    * Mirror
+    * L2 table
+    * Routing
+    * PTP
+    * QoS
+Firmware updates:
+    * RTL907X_6XA-V4-Patch-Firmware_V4.1.1_290920.bin
+Bug Fix
+    * N/A

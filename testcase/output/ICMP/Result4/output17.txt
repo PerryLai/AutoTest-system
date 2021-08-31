@@ -1,0 +1,32 @@
+---------- Data Link Layer ----------
+
+Data Link Layer Distination: dca632cc1f37
+Data Link Layer Source: 00e04c000001
+VLAN Layer Type: 8100
+
+---------- Network Layer ----------
+
+Network Layer ID: 000a
+Network Layer Type: 0800 (ICMP)
+Network Layer Version: 4
+Network Layer Header Length: 5
+Network Layer Differentiated Services Field: 00
+Network Layer Total Length: 0054
+Network Layer Identification: 2cf7
+Network Layer Flags: 0000
+Network Layer Time to live: 3e
+Protocol: 01 (ICMP)
+Network Layer Header Checksum: cb11
+Source IP: c0a80232 (192.168.2.50/32)
+Destination IP: c0a8011e (192.168.2.50/32)
+
+---------- Transport Layer ----------
+
+Transport Layer Type: 00 (Reply)
+Transport Layer Code: 00
+Transport Layer Checksum: 0aec
+Transport Layer Identifier BE: 129a
+Sequence Number: 004d
+Transport Layer Timestamp: f78d2461d73a0400
+
+Data: 08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637234567

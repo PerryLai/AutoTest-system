@@ -1,0 +1,8 @@
+#debug:0-off, others on. Print out parse this file info.
+debug=0
+#interface:i2c,smi
+interface=i2c
+#i2caddr 3bit, default 4
+i2caddrid=4
+#mdcaddrid 5 bit, default 24 (0x18), max 31
+mdcaddrid=24

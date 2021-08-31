@@ -1,0 +1,32 @@
+[RTKAutoSwitchTool]
+RTKAutoSwitchTool_fw_bin = D:\\CN5SW1\Desktop\\AutoTest Platform\\RTKAutoSwitchTool_VA_2.1.6.16.0\\fw_config.bin
+
+[fw 1]
+fw = fw1_config.bin
+
+[fw 2]
+fw = fw2_config.bin
+
+[fw 3]
+fw = fw3_config.bin
+
+[fw 4]
+fw = 
+
+[fw 5]
+fw = 
+
+[fw 6]
+fw = 
+
+[fw 7]
+fw = 
+
+[fw 8]
+fw = 
+
+[fw 9]
+fw = 
+
+[fw 10]
+fw = 

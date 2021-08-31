@@ -1,0 +1,27 @@
+[Net Namespace Set 1]
+test_program = icmp.sh
+NS1_NAME = net0
+NS1_VID = 10
+NS1_BASE_IF = eth0
+NS1_IP4 = 192.168.1.20
+NS1_MASK4 = 24
+NS1_GW4 = 192.168.1.254
+NS1_IP6 = fd53:7cb8:383:2::10f
+NS1_MASK6 = 64
+NS1_GW6 = fd53:7cb8:383:2::fc10
+NS1_GW_MAC = 00:E0:4C:00:00:01
+NS2_NAME = net1
+NS2_VID = 20
+NS2_BASE_IF = eth0
+NS2_IP4 = 192.168.2.50
+NS2_MASK4 = 24
+NS2_GW4 = 192.168.2.254
+NS2_IP6 = fd53:7cb8:383:5::e
+NS2_MASK6 = 64
+NS2_GW6 = fd53:7cb8:383:5::fc10
+NS2_GW_MAC = 00:E0:4C:00:00:02
+
+
+
+
+

@@ -1,0 +1,56 @@
+[Control Panel]
+HOST = 172.21.232.110
+USER = rtk
+PASSWORD = 123
+zip_dir_srcPath = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi
+zip_dir_dstname = D:\\perry_lai\\Desktop\\RaspberryPi.zip
+unzip_dir_srcName = 
+unzip_dir_dstPath = 
+main_client = /home/rtk/Desktop/main.sh
+source_code_client=/home/rtk/Desktop/RaspberryPi.zip
+main_local = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\main.sh
+source_code_local = D:\\perry_lai\\Desktop\\RaspberryPi.zip
+result_client = /home/rtk/Desktop/Result.zip
+result_local = D:\perry_lai\Desktop\\Result
+analyze = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\control panel\\packet analyze.py
+
+[Client]
+main = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\main.sh
+packet_capture = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\packet_capture.sh
+packet_offset = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\packet_offset.sh
+packet_transfer = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\packet_transfer.sh
+set_netns = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\set_netns.sh
+test_program = icmp.sh
+test_program_path = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi\\txt\\test_program.txt
+
+[Net Namespace Set 1]
+NS1_NAME = net0
+NS1_VID = 2
+NS1_BASE_IF = eth0
+NS1_IP4 = 192.168.2.29
+NS1_MASK4 = 24
+NS1_GW4 = 192.168.2.254
+NS1_IP6 = fd53:7cb8:383:2::10f
+NS1_MASK6 = 64
+NS1_GW6 = fd53:7cb8:383:2::fffe
+NS1_GW_MAC = 00:e0:4c:00:00:02
+
+[Net Namespace Set 2]
+NS2_NAME = net1
+NS2_VID = 5
+NS2_BASE_IF = eth1
+NS2_IP4 = 192.168.5.59
+NS2_MASK4 = 24
+NS2_GW4 = 192.168.5.254
+NS2_IP6 = fd53:7cb8:383:5::e
+NS2_MASK6 = 64
+NS2_GW6 = fd53:7cb8:383:5::fffe
+NS2_GW_MAC = 00:e0:4c:00:00:05
+
+[Testcase and Analyzation Related Filepath]
+ip_list_file = D:\\perry_lai\\Desktop\\AutoTest Platform\\ip_list.ini
+testcase_path = D:\\perry_lai\\Desktop\\AutoTest Platform\\testcase
+RaspberryPi_path = D:\\perry_lai\\Desktop\\AutoTest Platform\\Source Code\\client\\RaspberryPi
+output_icmp_file = D:\\perry_lai\\Desktop\\AutoTest Platform\\testcase\\output\\ICMP
+
+

@@ -1,0 +1,39 @@
+[fw 1]
+fw = fw1_config.bin
+i2cid = 4
+
+[fw 2]
+fw = fw2_config.bin
+i2cid = 4
+
+[fw 3]
+fw = fw3_config.bin
+i2cid = 6
+
+[fw 4]
+fw = 
+i2cid = 
+
+[fw 5]
+fw = 
+i2cid = 
+
+[fw 6]
+fw = 
+i2cid = 
+
+[fw 7]
+fw = 
+i2cid = 
+
+[fw 8]
+fw = 
+i2cid = 
+
+[fw 9]
+fw = 
+i2cid = 
+
+[fw 10]
+fw = 
+i2cid = 

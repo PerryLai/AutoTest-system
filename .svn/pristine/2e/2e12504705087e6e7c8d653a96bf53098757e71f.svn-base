@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+import sup
+import paramiko as pm
+
+### Config Setting ###
+# 設定檔位址
+config_file = 'D:\\CN5SW1\\Desktop\\AutoTest Platform\\config.ini'
+# 所有要在client做測試前設定的資訊，一次輸入一組
+ip_list_file = sup.config_file(config_file, "Testcase and Analyzation Related Filepath", "ip_list_file")
+# 要寄到client自動測試的檔案們
+set_netns_net0 = sup.config_file(config_file, "Client", "set_netns_net0")
+set_netns_net1 = sup.config_file(config_file, "Client", "set_netns_net1")
+main = sup.config_file(config_file, "Client", "main")
+test_program_path = sup.config_file(config_file, "Client", "test_program_path")
+#壓縮
+zip_dir_srcPath = sup.config_file(config_file, "Control Panel", "zip_dir_srcPath")
+zip_dir_dstname = sup.config_file(config_file, "Control Panel", "zip_dir_dstname")
+# 所有從client回傳的資料統整在這個資料夾
+testcase_path = sup.config_file(config_file, "Testcase and Analyzation Related Filepath", "testcase_path")
+# 把所有寫死的參數全部改成從config抓取變數，包含set_netns.sh(另寫一支子程式呼叫set_netns並修改參數)
+HOST_net0 = sup.config_file(config_file, "Control Panel", "HOST_net0")
+USER_net0 = sup.config_file(config_file, "Control Panel", "USER_net0")
+PASSWORD_net0 = sup.config_file(config_file, "Control Panel", "PASSWORD_net0")
+PORT_net0 = sup.config_file(config_file, "Control Panel", "PORT_net0")
+HOST_net1 = sup.config_file(config_file, "Control Panel", "HOST_net1")
+USER_net1 = sup.config_file(config_file, "Control Panel", "USER_net1")
+PASSWORD_net1 = sup.config_file(config_file, "Control Panel", "PASSWORD_net1")
+PORT_net1 = sup.config_file(config_file, "Control Panel", "PORT_net1")
+### Client address ###
+main_client = sup.config_file(config_file, "Control Panel", "main_client")
+source_code_client = sup.config_file(config_file, "Control Panel", "source_code_client")
+### Server address ###
+main_local = sup.config_file(config_file, "Control Panel", "main_local")
+source_code_local = sup.config_file(config_file, "Control Panel", "source_code_local")
+result_client=sup.config_file(config_file, "Control Panel", "result_client") #/home/pi/Desktop/Result.zip
+result_local=sup.config_file(config_file, "Control Panel", "result_local") #D:\CN5SW1\Desktop\\Result
+### 解壓縮路徑 ###
+unzip_dir_srcName = sup.config_file(config_file, "Control Panel", "unzip_dir_srcName")
+unzip_dir_dstPath = sup.config_file(config_file, "Control Panel", "unzip_dir_dstPath")
+### 外部程式 ###
+analyze = sup.config_file(config_file, "Control Panel", "analyze")
+cle = sup.config_file(config_file, "Control Panel", "cle")
+### Switch ###
+HOST = sup.config_file(config_file, "switch", "HOST")
+USER = sup.config_file(config_file, "switch", "USER")
+PASSWORD = sup.config_file(config_file, "switch", "PASSWORD")
+PORT = sup.config_file(config_file, "switch", "PORT")
+CP_normal = sup.config_file(config_file, "switch", "CP_normal")
+CP_fixed = sup.config_file(config_file, "switch", "CP_fixed")
+CP_forbidden = sup.config_file(config_file, "switch", "CP_forbidden")
+PC1_vlan = sup.config_file(config_file, "switch", "PC1_vlan")
+PC1_normal = sup.config_file(config_file, "switch", "PC1_normal")
+PC1_fixed = sup.config_file(config_file, "switch", "PC1_fixed")
+PC1_forbidden = sup.config_file(config_file, "switch", "PC1_forbidden")
+PC2_vlan = sup.config_file(config_file, "switch", "PC2_vlan")
+PC2_normal = sup.config_file(config_file, "switch", "PC2_normal")
+PC2_fixed = sup.config_file(config_file, "switch", "PC2_fixed")
+PC2_forbidden = sup.config_file(config_file, "switch", "PC2_forbidden")
+
+
+class AllowAllKeys(pm.MissingHostKeyPolicy):
+        def missing_host_key(self, client, hostname, key):
+            return
+
+transport = pm.Transport((HOST_net1,int(PORT_net1))) 
+transport.connect(username = USER_net1, password = PASSWORD_net1)
+sftp = pm.SFTPClient.from_transport(transport)
+sftp.put(main_local,main_client)
+sftp.put(source_code_local,source_code_client)
