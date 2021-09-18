@@ -1,4 +1,5 @@
 Auto Test Platform 基礎使用說明
+開發者 : 賴沛冠 Perry Lai
 ===
 ## 一、 架構
 ---
